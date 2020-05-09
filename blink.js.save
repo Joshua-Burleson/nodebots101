@@ -1,9 +1,0 @@
-var Raspi = require('raspi-io').RaspiIO;
-var j5 = require('johnny-five');
-
-var board = new j5.Board({
-	io: new Raspi()
-});
-
-board.on('ready', function(){ console.log('board ready'); (new j5.Led('P1-7')).strobe(); var button = new j5.Button('P1-8'); button.on('hold', function(){});
-});
