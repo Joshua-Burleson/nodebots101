@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Joshua-Burleson/nodebots101#readme",
   "dependencies": {
-    "onoff": "^6.0.0"
+    "johnny-five": "^1.4.0",
+    "onoff": "^6.0.0",
+    "raspi-io": "^11.0.0"
   }
 }

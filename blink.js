@@ -1,19 +1,20 @@
-var GPIO = require('onoff').Gpio;
-var LED = new GPIO(4, 'out');
+var Raspi = require('raspi-io').RaspiIO;
+var j5 = require('johnny-five');
 
-function blinkLED() { 
-	if(LED.readySync() === 0){
-		LED.writeSync(1);
-	} else{
-		LED.writeSync(0);
-	}
-}
+var board = new j5.Board({
+	io: new Raspi()
+});
 
-function endBlink(){
-	clearInterval(blinkInterval);
-	LED.writeSync(0);
-        LED.unexport;
-}
-
-var blinkInterval = setInterval(blinkLED, 250);
-setTimeout(endBlink, 5000);
+board.on('ready', function(){
+	console.log('board ready');
+	var LED = new j5.Led('P1-11');
+	var button = new j5.Button({pin: 'P1-7', inverted: true});
+	button.on('down', function(){
+		console.log('down');
+		LED.on();
+	});
+	button.on('up', function(){
+		console.log('up');
+		LED.off();
+	})
+});
